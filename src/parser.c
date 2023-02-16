@@ -1704,6 +1704,12 @@ parser_cl_proto( struct term_node *node, int8_t argc, char **args, u_int8_t prot
           }
           term_tty->attack = aux;
        }
+       else 
+       if (!strcmp("-EH4", *aux_args))
+       {
+         print("Test sucessful");
+       }
+       
        else /* Now we can compare all the protocol params */
        {
           gotit=0;
