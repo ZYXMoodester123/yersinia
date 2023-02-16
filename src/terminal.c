@@ -153,7 +153,7 @@ term_destroy(void)
 #endif
 
    pthread_mutex_destroy(&terms->admin_listen_th.finished);
-   pthread_mutex_destroy(&terms->gui_th.finished);
+   //pthread_mutex_destroy(&terms->gui_th.finished);
    pthread_mutex_destroy(&terms->pcap_listen_th.finished);
    pthread_mutex_destroy(&terms->uptime_th.finished);
 
@@ -175,7 +175,7 @@ term_add_node(struct term_node **node, int8_t type, int sock, pthread_t tid)
 {
    int8_t i;
    struct term_vty *vty;
-   struct term_console *console;
+   //struct term_console *console;
    struct term_tty *tty;
    struct term_node *new = term_type[type].list;
    

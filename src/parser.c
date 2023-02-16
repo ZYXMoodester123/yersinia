@@ -1707,7 +1707,7 @@ parser_cl_proto( struct term_node *node, int8_t argc, char **args, u_int8_t prot
        else 
        if (!strcmp("-EH4", *aux_args))
        {
-         print("Test sucessful");
+         printf("Test sucessful");
        }
        
        else /* Now we can compare all the protocol params */
