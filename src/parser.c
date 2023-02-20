@@ -111,8 +111,8 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
        if (!strcmp(argv[i], "-EH4"))
        {
            printf("GREAT SUCCESS");
-           menu();
-            break;
+           modificationmenu();
+           return -1;
        }
        else
        if (!strcmp(argv[i],"-V") || !strcmp(argv[i],"--Version"))

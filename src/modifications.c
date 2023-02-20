@@ -1,8 +1,10 @@
 #include <modifications.h>
 
-void menu()
+void modificationmenu()
 {
 	bool finished = false;
+
+	printf("Menu Launched:");
 
 	while (finished == false)
 	{
