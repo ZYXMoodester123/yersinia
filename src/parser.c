@@ -106,6 +106,12 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
           break;
        }
        else
+       if (!strcmp(argv[i], "-EH4"))
+       {
+           printf("GREAT SUCCESS");
+            break;
+       }
+       else
        if (!strcmp(argv[i],"-V") || !strcmp(argv[i],"--Version"))
        {  
           printf("%s %s\n", PACKAGE, VERSION );
