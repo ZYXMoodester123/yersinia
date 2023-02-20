@@ -209,7 +209,7 @@ term_add_node(struct term_node **node, int8_t type, int sock, pthread_t tid)
                     thread_error("term_add_node console calloc()",errno);
                     return -1;
                  }                       
-                 console = new->specific;
+                 //console = new->specific;
 #if defined (TIOCGWINSZ) && defined (HAVE_NCURSES_RESIZETERM)                       
                  console->need_resize = 0;
 #endif
