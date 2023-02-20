@@ -2,14 +2,21 @@
 
 void menu()
 {
-	int choice;
+	bool finished = false;
 
-	printf("Choose options:\n");
-	printf("1 - ARP Flooding\n");
-	printf("0 - Close Menu\n");
-
-	if (choice == 0)
+	while (finished == false)
 	{
-		return 0;
+		int choice = 0;
+
+		printf("Choose options:\n");
+		printf("1 - ARP Flooding\n");
+		printf("0 - Close Menu\n");
+
+		if (choice == 0)
+		{
+			finished = true;
+		}
 	}
+
+	return 0;
 }
