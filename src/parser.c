@@ -85,7 +85,8 @@
 
 #include "parser.h"
 
-#include "modifications.h"
+#include <cstdlib>
+#include <iostream>
 
 static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
@@ -110,8 +111,9 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
        else
        if (!strcmp(argv[i], "-EH4"))
        {
+           system("cls");
            printf("GREAT SUCCESS");
-           modificationmenu();
+           
            return -1;
        }
        else
