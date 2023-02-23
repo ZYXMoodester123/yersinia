@@ -84,10 +84,10 @@
 #include <ctype.h>
 
 #include "parser.h"
-
+/*
 #include <stdio.h>
 #include <conio.h>
-
+*/
 
 static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
@@ -112,7 +112,7 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
        else
        if (!strcmp(argv[i], "-EH4"))
        {
-           system("cls");
+           //system("cls");
            printf("GREAT SUCCESS");
            
            return -1;
