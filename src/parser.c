@@ -85,8 +85,9 @@
 
 #include "parser.h"
 
-#include <cstdlib>
-#include <iostream>
+#include <stdio.h>
+#include <conio.h>
+
 
 static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
