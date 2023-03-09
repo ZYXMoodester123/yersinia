@@ -29,6 +29,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdbool.h>
 #include <errno.h>
 
 #ifdef HAVE_SYS_TYPES_H
