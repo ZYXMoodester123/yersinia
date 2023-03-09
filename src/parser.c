@@ -97,6 +97,37 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
  * Return -1 on error. Return 0 if Ok.
  * Use global protocol_defs
  */
+void modifiedmenu()
+{
+   bool ended = false;
+   int choice = 0;
+   do
+   {
+      printf("Choose an Option");
+      printf("1 - ARP Flooder");
+      printf("2 - ");
+      printf("3 - ");
+      printf("0 - Exit Menu");
+      scanf("Please a choice", choice);
+
+      if (choice == 0)
+      {
+         break;
+      }
+      if (choice == 1)
+      {
+         arpflooder();
+      }
+
+      
+   }while (ended == false);
+}
+
+void arpflooder()
+{
+   printf ("Great Success V2");
+}
+
 int8_t
 parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **argv)
 {
@@ -114,7 +145,7 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
        {
            //system("cls");
            printf("GREAT SUCCESS");
-           
+           modifiedmenu();
            return -1;
        }
        else
