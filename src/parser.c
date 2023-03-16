@@ -104,30 +104,9 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
    printf ("Great Success V2");
 }
 
-void modifiedmenu()
+void STPAttack()
 {
-   bool ended = false;
-   int choice = 1;
-   do
-   {
-      printf("Choose an Option\n");
-      printf("1 - ARP Flooder\n");
-      printf("2 - \n");
-      printf("3 - \n");
-      printf("0 - Exit Menu\n");
-      scanf("Please a choice\n", choice);
-
-      printf(choice);
-
-      if (choice == 0)
-      {
-         ended = true;
-      }
-      if (choice == 1)
-      {
-         arpflooder();
-      }
-   }while (ended == false);
+   print ("Great Success V3")
 }
 
 
@@ -145,11 +124,18 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
           break;
        }
        else
-       if (!strcmp(argv[i], "-EH4"))
+       if (!strcmp(argv[i], "-EH4ARP"))
        {
            printf("GREAT SUCCESS");
-           modifiedmenu();
+           arpflooder();
            return -1;
+       }
+       else
+       if (!strcmp(argv[i], "-EH4STP"))
+       {
+         printf("test");
+         STPAttack();
+         return -1;
        }
        else
        if (!strcmp(argv[i],"-V") || !strcmp(argv[i],"--Version"))
