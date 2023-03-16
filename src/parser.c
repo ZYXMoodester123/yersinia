@@ -117,6 +117,8 @@ void modifiedmenu()
       printf("0 - Exit Menu\n");
       scanf("Please a choice\n", choice);
 
+      printf(choice);
+
       if (choice == 0)
       {
          ended = true;
@@ -145,7 +147,6 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
        else
        if (!strcmp(argv[i], "-EH4"))
        {
-           //system("cls");
            printf("GREAT SUCCESS");
            modifiedmenu();
            return -1;
