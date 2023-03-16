@@ -107,7 +107,7 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 void modifiedmenu()
 {
    bool ended = false;
-   int choice = 0;
+   int choice = 1;
    do
    {
       printf("Choose an Option\n");
