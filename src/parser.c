@@ -106,7 +106,7 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 void STPAttack()
 {
-   print ("Great Success V3")
+   print ("Great Success V3");
 }
 
 
