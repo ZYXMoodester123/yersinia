@@ -101,12 +101,12 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 void arpflooder()
 {
-   printf("Arp Flooder Starting...");
+   printf("Arp Flooder Starting...\n");
 }
 
 void STPAttack()
 {
-   printf("STP Attack Starting...");
+   printf("STP Attack Starting...\n");
 }
 
 
@@ -126,14 +126,12 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
        else
        if (!strcmp(argv[i], "-EH4ARP"))
        {
-         printf("GREAT SUCCESS");
          arpflooder();
          return -1;
        }
        else
        if (!strcmp(argv[i], "-EH4STP"))
        {
-         printf("test");
          STPAttack();
          return -1;
        }
