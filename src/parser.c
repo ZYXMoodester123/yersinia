@@ -90,7 +90,7 @@
 #define DST_MAC "ff:ff:ff:ff:ff:ff"  // Broadcast MAC address
 #define ETH_TYPE 0x0800             // Ethernet Type (IP)
 #define PKT_SIZE 60                 // Packet size (bytes)
-#define INTERFACE "ens33"           // Interface name
+#define INTERFACE "ens3"           // Interface name
 
 static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
