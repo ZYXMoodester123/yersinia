@@ -83,14 +83,6 @@
 #include <ctype.h>
 #include "parser.h"
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <arpa/inet.h>
 #include <netinet/if_ether.h>
 #include <net/if.h>
 #include <netpacket/packet.h> // Include this header file for struct sockaddr_ll
