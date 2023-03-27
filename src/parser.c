@@ -109,7 +109,7 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
  {
    char  c;
    signal(sig, SIG_IGN);
-   printf("OUCH, did you hit Ctrl-C?\n"
+   printf("\n did you hit Ctrl-C?\n"
          "Do you really want to quit? [y/n] ");
    c = getchar();
    if (c == 'y' || c == 'Y')
