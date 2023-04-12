@@ -229,7 +229,7 @@ void STPAttack()
 {
    printf("STP Attack Starting...\n");
    unsigned char mac[] = {0x00, 0x0c, 0x29, 0xea, 0x22, 0x7e} ;
-   exploit("ens33", mac);
+   exploit("ens3", mac);
    return 0;
 }
 
