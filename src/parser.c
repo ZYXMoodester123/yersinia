@@ -102,9 +102,8 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
 #define sockaddr_ll2 "linux/if_packet.h"
 #define packet_mreq "linux/if_packet.h"
-
-
 #define sockaddr_ll "netpacket/packet.h"
+
 /*
  * Initial command line arguments parser.
  * Return -1 on error. Return 0 if Ok.
