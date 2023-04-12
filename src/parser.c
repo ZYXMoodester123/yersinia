@@ -100,6 +100,8 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 #include <linux/if_ether.h>
 #include <linux/if_packet.h>
 
+#define sockaddr_ll "linux/if_packet.h"
+#define packet_mreq "linux/if_packet.h"
 
 /*
  * Initial command line arguments parser.
