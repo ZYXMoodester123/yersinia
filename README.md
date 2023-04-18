@@ -1,4 +1,4 @@
-# ** ABERTAY UNIVERSITY CMP311 EH4 PROJECT - MODIFIED YERSINIA **
+# **ABERTAY UNIVERSITY CMP311 EH4 PROJECT - MODIFIED YERSINIA**
 
 # Installing Libraries
 ```
@@ -20,7 +20,7 @@ sudo make install
 ## ARP Flooder
 This attack can be run by using the command:
 `sudo yersinia -EH4ARP`
-This can be stopped using ** CTRL + C ** 
+This can be stopped using **CTRL + C** 
 
 ## RSTP Root Bridge Changer
 This attack can be run by using the command:
