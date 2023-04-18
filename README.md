@@ -18,11 +18,13 @@ sudo make install
 
 # Running Attacks
 ## ARP Flooder
+The ARP Flooder that we created floods the broadcast address of the network which doesnt normal traffic to be returned
 This attack can be run by using the command:
 `sudo yersinia -EH4ARP`
 This can be stopped using **CTRL + C** 
 
 ## RSTP Root Bridge Changer
+The RSTP Root Bridge Changer attack chagnes the root bridge ID causing 
 This attack can be run by using the command:
 `sudo yersinia -EH4STP`
 
