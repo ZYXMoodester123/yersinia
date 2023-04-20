@@ -24,7 +24,7 @@ This attack can be run by using the command:
 This can be stopped using **CTRL + C** 
 
 ## RSTP Root Bridge Changer
-The RSTP Root Bridge Changer attack chagnes the root bridge ID causing 
+The RSTP Root Bridge Changer attack changes the root bridge ID. This can be used by a hacker to make a switch the root bridge and sniff all the traffic on the network.
 This attack can be run by using the command:
 `sudo yersinia -EH4STP`
 
